@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 // Conexión con MongoDB
-mongoose.connect('mongodb://localhost:27017/electronica360')
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log('Sí hay conexión a la BD electronica360');
     })
