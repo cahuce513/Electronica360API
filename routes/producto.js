@@ -55,21 +55,27 @@ router.delete('/:productoId', async (req, res) => {
 // Actualizar un producto por ID
 router.patch('/:productoId', async (req, res) => {
     try {
-        const productoActualizado = await Producto.updateOne(
-            { _id: req.params.productoId },
+        const productoActualizado = await Producto.findByIdAndUpdate(
+            req.params.productoId,
             {
-                $set: {
-                    nombre: req.body.nombre,
-                    categoria: req.body.categoria,
-                    precio: req.body.precio,
-                    stock: req.body.stock,
-                    marca: req.body.marca
-                }
+                nombre: req.body.nombre,
+                categoria: req.body.categoria,
+                precio: req.body.precio,
+                stock: req.body.stock,
+                marca: req.body.marca
+            },
+            {
+                new: true,
+                runValidators: true
             }
         );
+
         res.json(productoActualizado);
+
     } catch (error) {
-        res.json({ message: error.message });
+        res.status(500).json({
+            message: error.message
+        });
     }
 });
 

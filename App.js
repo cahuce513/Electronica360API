@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const port = 3000;
 
 // Parsear las solicitudes a formato JSON
 app.use(bodyParser.json());
+app.use(cors());
 
 // Importar las rutas de productos
 const productoRoute = require('./routes/producto');
